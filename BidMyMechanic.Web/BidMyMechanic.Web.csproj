@@ -14,5 +14,4 @@
     <ProjectReference Include="..\BidMyMechanic.Repositories\BidMyMechanic.Repositories.csproj" />
     <ProjectReference Include="..\BidMyMechanic.Services\BidMyMechanic.Services.csproj" />
   </ItemGroup>
-
 </Project>

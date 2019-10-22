@@ -31,6 +31,7 @@ namespace BidMyMechanic
                 db.UseSqlServer(_config.GetConnectionString("BidMyMechanicConnectionStringLocal"));
             });
 
+            services.AddTransient<BidMyMechanicSeeder>();
             services.AddScoped<IBidService, BidService>();
 
             services.AddControllersWithViews();
