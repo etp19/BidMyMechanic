@@ -27,7 +27,7 @@ namespace BidMyMechanic.Entities
     {
         public BidMyMechanicContext CreateDbContext(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(@Directory.GetCurrentDirectory() + "/../BidMyMechanic/config.json").Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(@Directory.GetCurrentDirectory() + "/../BidMyMechanic.Web/config.json").Build();
             var builder = new DbContextOptionsBuilder<BidMyMechanicContext>();
             var connectionString = configuration.GetConnectionString("BidMyMechanicConnectionStringLocal");
             builder.UseSqlServer(connectionString);

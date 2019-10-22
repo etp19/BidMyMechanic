@@ -9,7 +9,7 @@ namespace BidMyMechanic.Services
     {
         public IEnumerable<Bid> GetAllBids()
         {
-            throw new NotImplementedException();
+            return new List<Bid>();
         }
     }
 }
