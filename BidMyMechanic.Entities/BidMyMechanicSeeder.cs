@@ -29,15 +29,18 @@ namespace BidMyMechanic.Entities
             {
                 // Need to create sample data for vehicles
                 UtilSerializer serializer = new UtilSerializer();
-                var filePath = Path.Combine(_hosting.ContentRootPath, "vehicle.json");
+                var filePath = Path.Combine(_hosting.ContentRootPath, "vehicles.json");
                 IEnumerable<Vehicle> vehicleData = serializer.JSONDeserialize<Vehicle>(filePath);
                 if (vehicleData.Any())
                 {
-                    _bidMyMechanicContext.AddRange(vehicleData);
-                    _bidMyMechanicContext.SaveChanges();
+                    _bidMyMechanicContext.AddRange(vehicleData);                   
                     var issueTracking = new IssueTracking() { Id = 1, Status = "Peding", StatusDateTime = DateTime.Now };
                     var issue = new Issue() { Id = 1, IssueTracking = issueTracking, IssueType = "Exterior", Notes = "Feed Data", Vehicle = vehicleData.First() };
                     var bid = new Bid() { Id = 1, Amount = 400, BidTimePeriod = DateTime.Now, Notes = "Feed Data", UserId = 1, Vehicle = vehicleData.First() };
+                    _bidMyMechanicContext.Add(issueTracking);
+                    _bidMyMechanicContext.Add(issue);
+                    _bidMyMechanicContext.Add(bid);
+                    _bidMyMechanicContext.SaveChanges();
                 }
 
                 
