@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ namespace BidMyMechanic.Services.Services
 {
     public class UtilSerializer
     {
-        public T Deserialize<T>(string input) where T: class
+        public T XMLDeserialize<T>(string input) where T: class
         {
             XmlSerializer xml = new XmlSerializer(typeof(T));
             
@@ -19,7 +20,7 @@ namespace BidMyMechanic.Services.Services
             }
         }
 
-        public string Serialize<T>(T ObjectToSerialize)
+        public string XMLSerialize<T>(T ObjectToSerialize)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(ObjectToSerialize.GetType());
 
@@ -32,16 +33,25 @@ namespace BidMyMechanic.Services.Services
 
         public IEnumerable<T> CSVDeserialize<T>(string input) where T : class
         {
-            TextReader reader = new StreamReader(input);
-            var csvReader = new CsvReader(reader);
-            var records = csvReader.GetRecords<T>();
-            //using (CsvReader csvfile = new CsvReader(new StreamReader(input)))
-            //{
-            //    csvfile.Read();
-            //    csvfile.ReadHeader();
-            //    records =  csvfile.GetRecords<T>();
-            //}
-            return records;
+            // this is partially working, when encounter big amounts of data it does not work.
+            using (var reader = new StreamReader(input))
+            using (var csv = new CsvReader(reader))
+            {
+                var returnData = csv.GetRecords<T>();
+                return returnData;
+            }
+            
+        }
+        
+        public IEnumerable<T> JSONDeserialize<T>(string path) where T: class, new ()
+        {
+            if (File.Exists(path))
+            {
+                var jsonFile = File.ReadAllText(path);
+                var convertToObject = JsonConvert.DeserializeObject<IEnumerable<T>>(jsonFile);
+                return convertToObject;
+            }
+            return new List<T>();
         }
     }
 }
