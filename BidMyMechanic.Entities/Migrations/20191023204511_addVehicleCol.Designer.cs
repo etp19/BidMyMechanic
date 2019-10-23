@@ -4,14 +4,16 @@ using BidMyMechanic.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BidMyMechanic.Entities.Migrations
 {
     [DbContext(typeof(BidMyMechanicContext))]
-    partial class BidMyMechanicContextModelSnapshot : ModelSnapshot
+    [Migration("20191023204511_addVehicleCol")]
+    partial class addVehicleCol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

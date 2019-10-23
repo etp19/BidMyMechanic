@@ -34,9 +34,9 @@ namespace BidMyMechanic.Entities
                 if (vehicleData.Any())
                 {
                     _bidMyMechanicContext.AddRange(vehicleData);                   
-                    var issueTracking = new IssueTracking() { Id = 1, Status = "Peding", StatusDateTime = DateTime.Now };
-                    var issue = new Issue() { Id = 1, IssueTracking = issueTracking, IssueType = "Exterior", Notes = "Feed Data", Vehicle = vehicleData.First() };
-                    var bid = new Bid() { Id = 1, Amount = 400, BidTimePeriod = DateTime.Now, Notes = "Feed Data", UserId = 1, Vehicle = vehicleData.First() };
+                    var issueTracking = new IssueTracking() { Status = "Peding", StatusDateTime = DateTime.Now };
+                    var issue = new Issue() { IssueTracking = issueTracking, IssueType = "Exterior", Notes = "Feed Data", Vehicle = vehicleData.First() };
+                    var bid = new Bid() { Amount = 400, BidTimePeriod = DateTime.Now, Notes = "Feed Data", UserId = 1, Vehicle = vehicleData.First() };
                     _bidMyMechanicContext.Add(issueTracking);
                     _bidMyMechanicContext.Add(issue);
                     _bidMyMechanicContext.Add(bid);
