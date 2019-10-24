@@ -1,15 +1,21 @@
-﻿using BidMyMechanic.Entities;
-using BidMyMechanic.Services.Interfaces;
-using System;
+﻿using BidMyMechanic.Services.Interfaces;
 using System.Collections.Generic;
+using BidMyMechanic.Entities.Entities;
+using BidMyMechanic.Repositories.Interfaces;
 
 namespace BidMyMechanic.Services.Services
 {
     public class BidService : IBidService
     {
-        public IEnumerable<Bid> GetAllBids()
+        private readonly IBidRepository _bidRepository;
+
+        public BidService(IBidRepository bidRepository)
         {
-            return new List<Bid>();
+            _bidRepository = bidRepository;
+        }
+        public IEnumerable<Bid> GetAll()
+        {
+            return _bidRepository.GetAll();
         }
     }
 }

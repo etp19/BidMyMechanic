@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +30,8 @@ namespace BidMyMechanic.Web.Controllers
             }
             catch (Exception error)
             {
-                _logger.LogError($"Failed to get Products: {error}");
-                return BadRequest("Failed to get Products");
+                _logger.LogError($"Failed to get vehicles: {error}");
+                return BadRequest("Failed to get vehicles");
             }
             
         }

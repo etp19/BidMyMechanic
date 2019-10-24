@@ -4,14 +4,16 @@ using BidMyMechanic.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BidMyMechanic.Entities.Migrations
 {
     [DbContext(typeof(BidMyMechanicContext))]
-    partial class BidMyMechanicContextModelSnapshot : ModelSnapshot
+    [Migration("20191024142043_fixBidEntity")]
+    partial class fixBidEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,14 @@ namespace BidMyMechanic.Entities.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IssueId");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Bids");
                 });
@@ -189,6 +196,10 @@ namespace BidMyMechanic.Entities.Migrations
                     b.HasOne("BidMyMechanic.Entities.Entities.Issue", "Issue")
                         .WithMany()
                         .HasForeignKey("IssueId");
+
+                    b.HasOne("BidMyMechanic.Entities.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId");
                 });
 
             modelBuilder.Entity("BidMyMechanic.Entities.Entities.Issue", b =>

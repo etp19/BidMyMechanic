@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using BidMyMechanic.Entities;
+using BidMyMechanic.Entities.Entities;
 
 namespace BidMyMechanic.Repositories.Interfaces
 {
-    interface IBidRepository
+    public interface IBidRepository
     {
+        IEnumerable<Bid> GetAll();
     }
 }

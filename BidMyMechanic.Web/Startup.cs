@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using BidMyMechanic.Services.Interfaces;
 using BidMyMechanic.Services.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BidMyMechanic.Web
 {
@@ -29,18 +30,31 @@ namespace BidMyMechanic.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // db config and connection string
             services.AddDbContext<BidMyMechanicContext>(db => 
             {
                 db.UseSqlServer(_config.GetConnectionString("BidMyMechanicConnectionStringLocal"));
             });
 
+            // Seeder
             services.AddTransient<BidMyMechanicSeeder>();
+
+            // Services
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IBidService, BidService>();
+            services.AddScoped<IIssueService, IssueService>();
+            services.AddScoped<IIssueTrackingService, IssueTrackingService>();
+
+            //Repositories
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IBidRepository, BidRepository>();
             services.AddScoped<IBidService, BidService>();
 
+            // Configurations
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

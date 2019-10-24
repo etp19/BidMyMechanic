@@ -3,8 +3,8 @@ using BidMyMechanic.Entities.Entities;
 
 namespace BidMyMechanic.Services.Interfaces
 {
-    public interface IBidService
+    public interface IIssueService
     {
-        IEnumerable<Bid> GetAll();
+        IEnumerable<Issue> GetAll();
     }
 }
