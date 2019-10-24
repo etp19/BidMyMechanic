@@ -2,7 +2,7 @@
 
 namespace BidMyMechanic.Repositories
 {
-    public class Class1
+    public class BidRepository
     {
     }
 }

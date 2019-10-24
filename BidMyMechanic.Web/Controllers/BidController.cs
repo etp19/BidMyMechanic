@@ -7,24 +7,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BidMyMechanic.Entities.Entities;
 
 namespace BidMyMechanic.Web.Controllers.Api
 {
     public class BidController: Controller
     {
         private readonly IBidService _bidService;
-        private readonly BidMyMechanicContext _bidMyMechanicContext;
+        private readonly IVehicleService _vehicleService;
 
-        public BidController(IBidService bidService, BidMyMechanicContext bidMyMechanicContext)
+
+        public BidController(IBidService bidService, IVehicleService vehicleService)
         {
             _bidService = bidService;
-            _bidMyMechanicContext = bidMyMechanicContext;
+            _vehicleService = vehicleService;
         }
 
         public IActionResult Index()
         {
             IEnumerable<Bid> bids = _bidService.GetAllBids();
-            var result = _bidMyMechanicContext.Issues.ToList();
+            IEnumerable<Vehicle> vehicles = _vehicleService.GetAllVehicles();
             return View();
         }
     }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BidMyMechanic.Entities\BidMyMechanic.Entities.csproj" />
+    <ProjectReference Include="..\BidMyMechanic.Repositories\BidMyMechanic.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

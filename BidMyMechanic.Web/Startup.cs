@@ -9,11 +9,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BidMyMechanic.Entities;
+using BidMyMechanic.Repositories.Interfaces;
+using BidMyMechanic.Repositories.Repositories;
 using Microsoft.Extensions.Configuration;
 using BidMyMechanic.Services.Interfaces;
-using BidMyMechanic.Services;
+using BidMyMechanic.Services.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BidMyMechanic
+namespace BidMyMechanic.Web
 {
     public class Startup
     {
@@ -32,9 +35,12 @@ namespace BidMyMechanic
             });
 
             services.AddTransient<BidMyMechanicSeeder>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IBidService, BidService>();
 
-            services.AddControllersWithViews();
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

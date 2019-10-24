@@ -45,6 +45,7 @@ namespace BidMyMechanic.Services.Services
         
         public IEnumerable<T> JSONDeserialize<T>(string path) where T: class, new ()
         {
+            // Implementation for Json parsing and mapping to object.
             if (File.Exists(path))
             {
                 var jsonFile = File.ReadAllText(path);
