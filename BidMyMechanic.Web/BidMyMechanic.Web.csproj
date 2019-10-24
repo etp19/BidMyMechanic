@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
@@ -20,5 +21,6 @@
     <ProjectReference Include="..\BidMyMechanic.Entities\BidMyMechanic.Entities.csproj" />
     <ProjectReference Include="..\BidMyMechanic.Repositories\BidMyMechanic.Repositories.csproj" />
     <ProjectReference Include="..\BidMyMechanic.Services\BidMyMechanic.Services.csproj" />
+    <ProjectReference Include="..\BidMyMechanic.ViewModels\BidMyMechanic.ViewModels.csproj" />
   </ItemGroup>
 </Project>

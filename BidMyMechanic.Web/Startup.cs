@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BidMyMechanic.Entities;
@@ -14,6 +15,7 @@ using BidMyMechanic.Repositories.Repositories;
 using Microsoft.Extensions.Configuration;
 using BidMyMechanic.Services.Interfaces;
 using BidMyMechanic.Services.Services;
+using BidMyMechanic.ViewModels.Mappings;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -38,6 +40,9 @@ namespace BidMyMechanic.Web
 
             // Seeder
             services.AddTransient<BidMyMechanicSeeder>();
+
+            // AutoMapper Configuration
+            services.AddAutoMapper(typeof(BaseMappingProfile));
 
             // Services
             services.AddScoped<IVehicleService, VehicleService>();

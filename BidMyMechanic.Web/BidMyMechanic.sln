@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BidMyMechanic.Repositories"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BidMyMechanic.Entities", "..\BidMyMechanic.Entities\BidMyMechanic.Entities.csproj", "{EFB3DE10-1BD2-4812-9325-C516A740EE66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BidMyMechanic.Services", "..\BidMyMechanic.Services\BidMyMechanic.Services.csproj", "{FA12A303-C63F-4DA5-8300-6902877D65F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BidMyMechanic.Services", "..\BidMyMechanic.Services\BidMyMechanic.Services.csproj", "{FA12A303-C63F-4DA5-8300-6902877D65F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BidMyMechanic.ViewModels", "..\BidMyMechanic.ViewModels\BidMyMechanic.ViewModels.csproj", "{AE12F183-2E5F-4F7A-B257-61FA52EBEB65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{FA12A303-C63F-4DA5-8300-6902877D65F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA12A303-C63F-4DA5-8300-6902877D65F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA12A303-C63F-4DA5-8300-6902877D65F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE12F183-2E5F-4F7A-B257-61FA52EBEB65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE12F183-2E5F-4F7A-B257-61FA52EBEB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE12F183-2E5F-4F7A-B257-61FA52EBEB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE12F183-2E5F-4F7A-B257-61FA52EBEB65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

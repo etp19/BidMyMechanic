@@ -17,5 +17,20 @@ namespace BidMyMechanic.Services.Services
         {
             return _bidRepository.GetAll();
         }
+
+        public Bid GetBidById(int id)
+        {
+            return _bidRepository.GetBidById(id);
+        }
+
+        public Issue GetBidRelateIssueById(int bidId)
+        {
+            return _bidRepository.GetBidRelateIssueById(bidId);
+        }
+
+        public bool SaveEntity<T>(T model)
+        {
+           return _bidRepository.SaveEntity(model);
+        }
     }
 }
