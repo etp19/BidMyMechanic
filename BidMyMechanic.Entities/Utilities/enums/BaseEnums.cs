@@ -20,5 +20,12 @@ namespace BidMyMechanic.Entities.Utilities.enums
             Pending,
             Close
         }
+
+        public enum IncludeParts
+        {
+            Yes,
+            No,
+            NotApplicable
+        }
     }
 }

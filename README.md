@@ -1,6 +1,6 @@
-# Foobar
+# BidMyMechanic
 
-Foobar is a Python library for dealing with word pluralization.
+BidMyMechanic is a .Net Core & Angular web application.
 
 ## Installation
 
