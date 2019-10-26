@@ -12,6 +12,7 @@ namespace BidMyMechanic.ViewModels.Mappings
         public BaseMappingProfile()
         {
             CreateMap<Bid, BidViewModel>().ReverseMap();
+            CreateMap<Issue, IssueViewModel>().ReverseMap();
         }
     }
 }

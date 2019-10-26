@@ -2,14 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BidMyMechanic.Entities
 {
-    public class BidMyMechanicContext: DbContext
+    public class BidMyMechanicContext: IdentityDbContext<BidUser>
     {
         public BidMyMechanicContext(DbContextOptions<BidMyMechanicContext> options) : base(options) { }
         public DbSet<Bid> Bids { get; set; }

@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using BidMyMechanic.Entities;
 using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -20,6 +21,7 @@ namespace BidMyMechanic.Repositories.Repositories
             _dbContext = dbContext;
             _logger = logger;
         }
+
         public IEnumerable<Bid> GetAll()
         {
             return _dbContext.Bids
@@ -38,8 +40,16 @@ namespace BidMyMechanic.Repositories.Repositories
 
         public Issue GetBidRelateIssueById(int bidId)
         {
-            return _dbContext.Bids.Select(x => x.Issue)
-                .FirstOrDefault(x => x.Id == bidId);
+            var issue = _dbContext.Bids.Select(x => x.Issue).FirstOrDefault(o => o.Id == bidId);
+            if (issue != null)
+            {
+                var completeIssue = _dbContext.Issues.Where(x => x.Id == issue.Id)
+                    .Include(car => car.Vehicle)
+                    .Include(issueTrack => issueTrack.IssueTracking)
+                    .FirstOrDefault();
+                return completeIssue;
+            }
+            else return null;
         }
 
         public bool SaveEntity<T>(T model)

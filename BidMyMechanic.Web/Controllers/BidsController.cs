@@ -4,6 +4,7 @@ using System;
 using AutoMapper;
 using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.ViewModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace BidMyMechanic.Web.Controllers
@@ -25,6 +26,7 @@ namespace BidMyMechanic.Web.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Get()
         {
@@ -62,7 +64,8 @@ namespace BidMyMechanic.Web.Controllers
         {
             try
             {
-                return Ok(_bidService.GetBidRelateIssueById(id));
+                var issue =_mapper.Map<Issue, IssueViewModel>(_bidService.GetBidRelateIssueById(id));
+                return Ok(issue);
             }
             catch (Exception e)
             {
