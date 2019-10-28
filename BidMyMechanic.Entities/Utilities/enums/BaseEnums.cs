@@ -8,7 +8,7 @@ namespace BidMyMechanic.Entities.Utilities.enums
     {
         public enum UserType
         {
-            Buyer,
+            Client,
             Supplier,
             Employee
         }

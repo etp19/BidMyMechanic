@@ -10,14 +10,12 @@ using Microsoft.Extensions.Logging;
 namespace BidMyMechanic.Web.Controllers
 {
     [Route("api/[Controller]")]
-    [ApiController]
-    [Produces("application/json")]
+    [Authorize]
     public class BidsController: Controller
     {
         private readonly IBidService _bidService;
         private readonly ILogger<BidsController> _logger;
         private readonly IMapper _mapper;
-
 
         public BidsController(IBidService bidService, ILogger<BidsController> logger, IMapper mapper)
         {
@@ -26,7 +24,6 @@ namespace BidMyMechanic.Web.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Get()
         {

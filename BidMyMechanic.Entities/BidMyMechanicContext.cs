@@ -14,6 +14,8 @@ namespace BidMyMechanic.Entities
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<IssueTracking> IssueTrackings { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

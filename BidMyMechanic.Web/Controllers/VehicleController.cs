@@ -10,7 +10,7 @@ namespace BidMyMechanic.Web.Controllers
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class VehicleController: ControllerBase
+    public class VehicleController: Controller
     {
         private readonly IVehicleService _vehicleService;
         private readonly ILogger<VehicleController> _logger;

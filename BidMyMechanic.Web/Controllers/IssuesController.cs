@@ -8,7 +8,7 @@ namespace BidMyMechanic.Web.Controllers
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class IssuesController : ControllerBase
+    public class IssuesController : Controller
     {
         private readonly ILogger<IssuesController> _logger;
         private readonly IIssueService _issueService;

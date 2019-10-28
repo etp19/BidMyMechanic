@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
@@ -10,14 +5,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BidMyMechanic.Entities;
+using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.Repositories.Interfaces;
 using BidMyMechanic.Repositories.Repositories;
 using Microsoft.Extensions.Configuration;
 using BidMyMechanic.Services.Interfaces;
 using BidMyMechanic.Services.Services;
 using BidMyMechanic.ViewModels.Mappings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace BidMyMechanic.Web
 {
@@ -32,6 +32,24 @@ namespace BidMyMechanic.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Identity Configuration
+            services.AddIdentityCore<BidUser>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<BidMyMechanicContext>()
+                .AddSignInManager<SignInManager<BidUser>>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = _config["Tokens:Issuer"],
+                        ValidAudience = _config["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                    };
+                });
+
             // db config and connection string
             services.AddDbContext<BidMyMechanicContext>(db => 
             {
@@ -74,11 +92,13 @@ namespace BidMyMechanic.Web
 
             app.UseRouting();
 
-            app.UseEndpoints(cfg =>
-            {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(cfg => {
                 cfg.MapControllerRoute("Default",
-                      "{controller}/{action}/{id?}",
-                      new { controller = "Bid", Action = "Index" });
+                    "{controller}/{action}/{id?}",
+                    new { controller = "Bid", Action = "Index" });
             });
         }
     }

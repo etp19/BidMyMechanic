@@ -10,6 +10,7 @@ namespace BidMyMechanic.Entities.Entities
         public string IssueType { get; set; }
         public decimal Amount { get; set; }
         public Vehicle Vehicle { get; set; }
+        public BidUser BidUser { get; set; }
         public IssueTracking IssueTracking { get; set; }
         public string Notes { get; set; }
     }

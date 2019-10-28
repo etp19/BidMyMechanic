@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using BidMyMechanic.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace BidMyMechanic.Web
 {
@@ -27,7 +21,7 @@ namespace BidMyMechanic.Web
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<BidMyMechanicSeeder>();
-                seeder.Seed();
+                seeder.SeedAsync().Wait();
             }           
         }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BidMyMechanic.Entities.Entities
 {
@@ -8,6 +6,7 @@ namespace BidMyMechanic.Entities.Entities
     {
         public int Id { get; set; }
         public IEnumerable<Bid> BidHistory { get; set; }
+        public IEnumerable<Issue> IssueHistory { get; set; }
         public BidUser BidUser { get; set; }
     }
 }
