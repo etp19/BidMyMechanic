@@ -8,6 +8,7 @@ namespace BidMyMechanic.Services.Interfaces
         IEnumerable<Bid> GetAll();
         Bid GetBidById(int id);
         Issue GetBidRelateIssueById(int bidId);
+        IEnumerable<Bid> GetBidsByUser(string userName);
         bool SaveEntity<T>(T model);
     }
 }

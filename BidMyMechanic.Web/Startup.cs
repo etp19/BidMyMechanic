@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
@@ -46,7 +47,8 @@ namespace BidMyMechanic.Web
                     {
                         ValidIssuer = _config["Tokens:Issuer"],
                         ValidAudience = _config["Tokens:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"])),
+                        ClockSkew = TimeSpan.FromMinutes(0)
                     };
                 });
 

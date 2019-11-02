@@ -6,6 +6,7 @@ using BidMyMechanic.Entities;
 using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -15,11 +16,13 @@ namespace BidMyMechanic.Repositories.Repositories
     {
         private readonly BidMyMechanicContext _dbContext;
         private readonly ILogger<BidRepository> _logger;
+        private readonly UserManager<BidUser> _userManager;
 
-        public BidRepository(BidMyMechanicContext dbContext, ILogger<BidRepository> logger)
+        public BidRepository(BidMyMechanicContext dbContext, ILogger<BidRepository> logger, UserManager<BidUser> userManager)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public IEnumerable<Bid> GetAll()
@@ -27,6 +30,15 @@ namespace BidMyMechanic.Repositories.Repositories
             return _dbContext.Bids
                 .Include(issue => issue.Issue).ThenInclude(vehicle => vehicle.IssueTracking)
                 .Include(issue => issue.Issue).ThenInclude(vehicle => vehicle.Vehicle)
+                .ToList();
+        }
+
+        public IEnumerable<Bid> GetBidsByUser(string userName)
+        {
+            return _dbContext.Bids
+                .Include(issue => issue.Issue).ThenInclude(vehicle => vehicle.IssueTracking)
+                .Include(issue => issue.Issue).ThenInclude(vehicle => vehicle.Vehicle)
+                .Where(info => info.BidUser.UserName == userName)
                 .ToList();
         }
 

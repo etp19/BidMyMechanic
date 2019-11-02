@@ -10,6 +10,6 @@
   "Tokens": {
     "Key": "as;er;as;;da;;asd;;as",
     "Issuer": "localhost",
-    "Audience":  ""  
+    "Audience":  "General"  
   } 
 }

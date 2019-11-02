@@ -1,10 +1,13 @@
 ﻿using BidMyMechanic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using BidMyMechanic.Entities.Entities;
 using BidMyMechanic.ViewModels.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace BidMyMechanic.Web.Controllers
@@ -16,12 +19,14 @@ namespace BidMyMechanic.Web.Controllers
         private readonly IBidService _bidService;
         private readonly ILogger<BidsController> _logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<BidUser> _userManager;
 
-        public BidsController(IBidService bidService, ILogger<BidsController> logger, IMapper mapper)
+        public BidsController(IBidService bidService, ILogger<BidsController> logger, IMapper mapper, UserManager<BidUser> userManager)
         {
             _bidService = bidService;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -71,14 +76,31 @@ namespace BidMyMechanic.Web.Controllers
             }
         }
 
+        [HttpGet("byUser")]
+        public ActionResult GetBidsByUser(string user)
+        {
+            try
+            {
+                var userName = User.Identity.Name;
+                var bids = _mapper.Map<IEnumerable<Bid>, IEnumerable<BidViewModel>>(_bidService.GetBidsByUser(userName));
+                return Ok(bids);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Failed to get Bids by User Name. Error: {e}" );
+            }
+        }
+
         [HttpPost]
-        public ActionResult Post([FromBody]BidViewModel model)
+        public async Task<ActionResult> Post([FromBody]BidViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var newBid = _mapper.Map<BidViewModel, Bid>(model);
+                    newBid.BidUser = await _userManager.FindByNameAsync(User.Identity.Name);
                     if (_bidService.SaveEntity(newBid))
                     {
                         return Created($"/api/bids/{newBid.Id}", _mapper.Map<Bid, BidViewModel>(newBid));

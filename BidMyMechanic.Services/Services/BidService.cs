@@ -28,6 +28,11 @@ namespace BidMyMechanic.Services.Services
             return _bidRepository.GetBidRelateIssueById(bidId);
         }
 
+        public IEnumerable<Bid> GetBidsByUser(string userName)
+        {
+            return _bidRepository.GetBidsByUser(userName);
+        }
+
         public bool SaveEntity<T>(T model)
         {
            return _bidRepository.SaveEntity(model);

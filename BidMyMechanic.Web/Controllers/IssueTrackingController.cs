@@ -1,13 +1,13 @@
 ﻿using System;
 using BidMyMechanic.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace BidMyMechanic.Web.Controllers
 {
     [Route("api/[Controller]")]
-    [ApiController]
-    [Produces("application/json")]
+    [Authorize]
     public class IssueTrackingController: Controller
     {
         private readonly IIssueTrackingService _issueTrackingService;
