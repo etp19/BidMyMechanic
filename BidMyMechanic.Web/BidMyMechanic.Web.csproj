@@ -25,4 +25,9 @@
     <ProjectReference Include="..\BidMyMechanic.Services\BidMyMechanic.Services.csproj" />
     <ProjectReference Include="..\BidMyMechanic.ViewModels\BidMyMechanic.ViewModels.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="ClientApp\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
 </Project>
